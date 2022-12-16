@@ -1,0 +1,22 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+
+model Connectdb {
+  id       Int    @id @default(autoincrement())
+  name     String
+  server   String
+  username String
+  password String
+  port     String
+  type     String
+}
+
+
+ 
