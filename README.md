@@ -1,5 +1,5 @@
 # Colio
-Tool DataBase control for MSSQL, MySQL, PostgreSQL
+Tool DataBase control for MSSQL, MySQL, PostgreSQL etc.
 
 
 * statstics for server database
