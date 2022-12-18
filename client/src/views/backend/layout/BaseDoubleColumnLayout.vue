@@ -3,7 +3,7 @@
     <div class="container-scroller">
         <!-- header-->
         <div class="container-full">
-            <SideBar />
+            <TheSideBar />
             <div class="main-panel">
                 <div class="content-wrapper">
                     <div class="row">
@@ -26,7 +26,7 @@
 </template>
 
 <script setup>
-import SideBar from './partials/Sidebar.vue'
+import TheSideBar from './partials/TheSideBar.vue'
 import SidebarSecond from './partials/SidebarSecond.vue'
 </script>
 

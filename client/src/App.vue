@@ -1,6 +1,6 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import SideBar from './views/backend/layout/partials/Sidebar.vue'
+import TheSideBar from './views/backend/layout/partials/TheSideBar.vue'
 import BazeLayout from './views/backend/layout/BaseDoubleColumnLayout.vue';
 </script>
 
