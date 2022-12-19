@@ -16,7 +16,7 @@
     aria-labelledby="offcanvasRightLabel"
   >
     <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasRightLabel">Offcanvas right</h5>
+      <h5 class="offcanvas-title" id="offcanvasRightLabel">Server</h5>
       <button
         type="button"
         class="btn-close"
@@ -24,8 +24,15 @@
         aria-label="Close"
       ></button>
     </div>
-    <div class="offcanvas-body"></div>
+    <div class="offcanvas-body">
+      <!-- <form-component v-else mode="edit" :item="selectedItem" /> -->
+      <FormServer v-if="mode === 'create'" mode="create" />
+    </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import FormServer from "./FormServer.vue";
+import { ref } from "vue";
+const mode = ref("create");
+</script>

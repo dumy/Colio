@@ -8,6 +8,55 @@ router.get("/", async (req, res) => {
   res.json(result);
 });
 
+router.post("/add", async function (req, res, next) {
+  try {
+    const user = await prisma.connectdb.create({
+      data: {
+        name: req.body.server.name,
+        server: req.body.server.ip,
+        port: req.body.server.port,
+        username: req.body.server.username,
+        password: req.body.server.password,
+        type: req.body.server.type,
+      },
+    });
+    console.log(user);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get("/get/:id", async function (req, res, next) {
+  try {
+    const serverIDDetail = await prisma.connectdb.findUnique({
+      where: {
+        id: parseInt(req.params.id),
+      },
+    });
+    res.json(serverIDDetail);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.post("/edit", async function (req, res, next) {
+  try {
+    const user = await prisma.connectdb.create({
+      data: {
+        name: req.body.server.name,
+        server: req.body.server.ip,
+        port: req.body.server.port,
+        username: req.body.server.username,
+        password: req.body.server.password,
+        type: req.body.server.type,
+      },
+    });
+    console.log(user);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.post("/detail", async function (req, res, next) {
   var ServerID = req.body.params.ServerID;
   var sql = `declare @tables nvarchar(max); 
@@ -225,17 +274,17 @@ router.post("/mssql/sessions", async function (req, res, next) {
 });
 
 router.post("/mssql/session/kill", async function (req, res, next) {
-    var ServerID = req.body.params.ServerID;
-    var spid = req.body.params.spid;
-    console.log(spid);
-    var sql = `KILL `+spid;
-    console.log(sql);
-    try {
-      var results = await conects.execute(ServerID, sql);
-      res.json(results);
-    } catch (err) {
-      next(err);
-    }
-  });
+  var ServerID = req.body.params.ServerID;
+  var spid = req.body.params.spid;
+  console.log(spid);
+  var sql = `KILL ` + spid;
+  console.log(sql);
+  try {
+    var results = await conects.execute(ServerID, sql);
+    res.json(results);
+  } catch (err) {
+    next(err);
+  }
+});
 
 module.exports = router;

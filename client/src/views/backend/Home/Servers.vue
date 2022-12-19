@@ -15,6 +15,17 @@
                 <li>IP:{{ server.server }}</li>
                 <li>UserName: {{ server.username }}</li>
               </div>
+              <div class="d-flex flex-row-reverse bd-highlight">
+                <div class="p-2 bd-highlight">
+                  <i
+                    class="bi bi-pencil"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasRight"
+                    aria-controls="offcanvasRight"
+                    @click="store.getServer(server.id)"
+                  />
+                </div>
+              </div>
             </div>
           </RouterLink>
         </div>
@@ -24,7 +35,7 @@
 </template>
 
 <script setup>
-import { onMounted, reactive } from "vue";
+import { onMounted, ref } from "vue";
 import { useServerStore } from "@/stores/server";
 import AddServe from "./AddServer.vue";
 
@@ -37,3 +48,10 @@ onMounted(() => {
   store.allServer();
 });
 </script>
+
+<style scoped>
+i:hover {
+  cursor: pointer;
+  color: red;
+}
+</style>

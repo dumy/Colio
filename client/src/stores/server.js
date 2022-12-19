@@ -4,7 +4,7 @@ import axios from "axios";
 
 export const useServerStore = defineStore("server", () => {
   const servers = ref([]);
-  const serverId = ref(null);
+  const serverId = ref();
   const detail = ref([]);
   const cpu = ref(0);
   const memory = ref(0);
@@ -15,7 +15,8 @@ export const useServerStore = defineStore("server", () => {
     memory: 0,
     storage:[],
     sessions:[],
-    kill: 0
+    kill: 0,
+    get:{}
   })
 
   async function allServer() {
@@ -23,7 +24,28 @@ export const useServerStore = defineStore("server", () => {
       const data = await axios.get("http://localhost:3000/server");
       servers.value = data.data;
     } catch (error) {
-      alert(error);
+      
+      console.log(error);
+    }
+  }
+  async function getServer(id) {
+    try {
+      const data = await axios.get("http://localhost:3000/server/get/" + id);
+      serverDetail.get = data.data;
+    
+    } catch (error) {
+      
+      console.log(error);
+    }
+  }
+  async function addServer(server) {
+    console.log(server);
+    try {
+      const data = await axios.post("http://localhost:3000/server/add",{
+        server: server,
+      });
+    } catch (error) {
+      
       console.log(error);
     }
   }
@@ -36,7 +58,7 @@ export const useServerStore = defineStore("server", () => {
       });
       serverDetail.detail = data.data[0];
     } catch (error) {
-      alert(error);
+      
       console.log(error);
     }
   }
@@ -49,7 +71,7 @@ export const useServerStore = defineStore("server", () => {
       });
       serverDetail.cpu = data.data.cpuUsed;
     } catch (error) {
-      alert(error);
+      
       console.log(error);
     }
   }
@@ -62,7 +84,7 @@ export const useServerStore = defineStore("server", () => {
       });
       serverDetail.memory = data.data.usedProcetage;
     } catch (error) {
-      alert(error);
+      
       console.log(error);
     }
   }
@@ -75,7 +97,7 @@ export const useServerStore = defineStore("server", () => {
       });
       serverDetail.storage = data.data;
     } catch (error) {
-      alert(error);
+      
       console.log(error);
     }
   }
@@ -88,7 +110,7 @@ export const useServerStore = defineStore("server", () => {
       });
       serverDetail.sessions = data.data;
     } catch (error) {
-      alert(error);
+      
       console.log(error);
     }
   }
@@ -104,12 +126,12 @@ export const useServerStore = defineStore("server", () => {
       });
       serverDetail.kill = 1;
     } catch (error) {
-      alert(error);
+      
       console.log(error);
     }
   }
 
   
 
-  return { servers, allServer, detailServer,mssqlCPU,mssqlMemory, serverDetail,mssqlStorage,sessions,kill };
+  return { servers, allServer, detailServer,mssqlCPU,mssqlMemory, serverDetail,mssqlStorage,sessions,kill, addServer, getServer };
 });
